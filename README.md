@@ -5,7 +5,7 @@
 
 - **GitHub:** https://github.com/Al0raLish/pretty-in-pink-cafe
 - **Deployment:** https://pretty-in-pink-cafe.vercel.app/
-- **Final commit:** 6c0f667
+- **Final commit:** c31706a
 
 ## Description
 A frontend-only ordering website for a fictional Barbie-inspired café in Islamabad (F-6 to G-8 delivery area) for students and professionals. Customers browse the menu, search and filter, open item pages, choose sizes and add-ons, build a cart, fill in a checkout form, and reach a confirmation. All data is local and all orders and payments are simulated.
