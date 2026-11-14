@@ -1,6 +1,6 @@
 // src/data/menuItems.js
 // All data is fictional. Prices are in Pakistani Rupees (Rs.).
-
+import { ITEM_DETAILS } from './itemDetails.js';
 export const CATEGORIES = ['Coffee', 'Refreshers', 'Desserts', 'Bakery', 'Light Meals'];
 
 // Sizes: "extra" is added to the base price.
@@ -21,7 +21,7 @@ export const ADD_ONS = [
   { id: 'side-salad', label: 'Side salad', price: 150 },
 ];
 
-export const menuItems = [
+export const baseItems = [
   {
     id: 'rose-petal-latte', name: 'Rose Petal Latte', category: 'Coffee', price: 520,
     description: 'Espresso with steamed milk and a delicate rose infusion.',
@@ -100,3 +100,6 @@ export const menuItems = [
     sizes: [], addOns: ['side-salad'],
   },
 ];
+
+// Combine each base item with its ingredient and allergen details
+export const menuItems = baseItems.map((item) => ({ ...item, ...ITEM_DETAILS[item.id] }));

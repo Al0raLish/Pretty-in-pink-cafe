@@ -1065,3 +1065,41 @@ h3,
     flex: 1;
     min-width: 0;
 }
+
+/* ================= Dietary, item info, alternatives ================= */
+.badge-diet {
+    background: var(--peach);
+    color: #5e3b1c;
+    display: inline-block;
+    margin: 0 0 .75rem;
+}
+
+.item-info {
+    margin: 1rem 0;
+}
+
+.info-list {
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+}
+
+.info-list>div {
+    padding: .6rem 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.info-list>div:last-child {
+    border-bottom: 0;
+}
+
+.info-list dt {
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+.info-list dd {
+    margin: .15rem 0 0;
+    color: var(--text-muted);
+}

@@ -24,6 +24,7 @@ export default function MenuCard({ item }) {
                     {item.addOns.length > 0 ? `${item.addOns.length} add-ons` : 'No add-ons'}
                 </p>
                 {inCart > 0 && <p className="badge badge-cart">In your cart: {inCart}</p>}
+                {item.vegan ? <p className="badge badge-diet">Vegan</p> : item.vegetarian ? <p className="badge badge-diet">Vegetarian</p> : null}
                 <div className="card-footer">
                     <span className="price">{formatPrice(item.price)}</span>
                     {unavailable

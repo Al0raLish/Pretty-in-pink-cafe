@@ -5,6 +5,8 @@ import FoodImage from '../components/FoodImage.jsx';
 import AddToCartPanel from '../components/AddToCartPanel.jsx';
 import LoadingState from '../components/LoadingState.jsx';
 import ErrorState from '../components/ErrorState.jsx';
+import ItemInfo from '../components/ItemInfo.jsx';
+import SimilarItems from '../components/SimilarItems.jsx';
 
 export default function ItemDetailsPage() {
   const { id } = useParams();
@@ -63,6 +65,7 @@ export default function ItemDetailsPage() {
           )}
         </div>
       </div>
+      {unavailable && <SimilarItems item={item} items={items} />}
     </>
   );
 }

@@ -5,6 +5,11 @@ export const PRICE_RANGES = [
     { id: '500-800', label: 'Rs. 500 to 800', min: 500, max: 800 },
     { id: 'over-800', label: 'Over Rs. 800', min: 801, max: Infinity },
 ];
+export const DIET_OPTIONS = [
+  { id: 'any', label: 'Any' },
+  { id: 'vegetarian', label: 'Vegetarian' },
+  { id: 'vegan', label: 'Vegan' },
+];
 
 export const SORT_OPTIONS = [
     { id: 'featured', label: 'Featured' },
@@ -13,20 +18,21 @@ export const SORT_OPTIONS = [
     { id: 'name', label: 'Name: A to Z' },
 ];
 
-export function filterAndSortItems(items, { search, category, priceId, sortId, availableOnly = false }) {
-    const text = search.trim().toLowerCase();
+export function filterAndSortItems(items, { search, category, priceId, sortId, availableOnly = false, dietId = 'any' }) {    const text = search.trim().toLowerCase();
     const range = PRICE_RANGES.find((r) => r.id === priceId) ?? PRICE_RANGES[0];
 
     const filtered = items.filter((item) => {
         const matchesText =
             text === '' ||
             item.name.toLowerCase().includes(text) ||
+            (item.ingredients ?? []).some((i) => i.toLowerCase().includes(text)) ||
             (item.description ?? '').toLowerCase().includes(text) || item.category.toLowerCase().includes(text);
 
         const matchesAvailability = !availableOnly || (item.available && item.stock > 0);
         const matchesCategory = category === 'All' || item.category === category;
         const matchesPrice = item.price >= range.min && item.price <= range.max;
-        return matchesText && matchesCategory && matchesPrice && matchesAvailability;
+        const matchesDiet = dietId === 'any' || item[dietId] === true;
+        return matchesText && matchesCategory && matchesPrice && matchesAvailability && matchesDiet;
     });
 
     // [...filtered] makes a copy, so we never mutate the original array

@@ -1,8 +1,7 @@
 import { CATEGORIES } from '../data/menuItems.js';
-import { PRICE_RANGES, SORT_OPTIONS } from '../utils/filterItems.js';
-
+import { PRICE_RANGES, SORT_OPTIONS, DIET_OPTIONS } from '../utils/filterItems.js';
 // Props: current values + one callback that tells the parent what changed
-export default function MenuFilters({ search, category, priceId, sortId, availableOnly, onChange, onClear, hasActiveFilters }) {
+export default function MenuFilters({ search, category, priceId, sortId, availableOnly, dietId, onChange, onClear, hasActiveFilters }) {
     return (
         <form className="filters" role="search" aria-label="Filter menu" onSubmit={(e) => e.preventDefault()}>
             <div className="field field-wide">
@@ -23,6 +22,13 @@ export default function MenuFilters({ search, category, priceId, sortId, availab
                 <label htmlFor="menu-price">Price</label>
                 <select id="menu-price" value={priceId} onChange={(e) => onChange('price', e.target.value, 'all')}>
                     {PRICE_RANGES.map((r) => <option key={r.id} value={r.id}>{r.label}</option>)}
+                </select>
+            </div>
+
+            <div className="field">
+                <label htmlFor="menu-diet">Dietary</label>
+                <select id="menu-diet" value={dietId} onChange={(e) => onChange('diet', e.target.value, 'any')}>
+                    {DIET_OPTIONS.map((d) => <option key={d.id} value={d.id}>{d.label}</option>)}
                 </select>
             </div>
 
