@@ -4,7 +4,7 @@
 **Course:** CS4032 Web Programming, Assignment 02, Fall 2026
 
 - **GitHub:** https://github.com/Al0raLish/pretty-in-pink-cafe
-- **Deployment:** https://YOUR-PROJECT.vercel.app
+- **Deployment:** https://pretty-in-pink-cafe.vercel.app/
 - **Final commit:** `PASTE-HASH-HERE`
 
 ## Description
