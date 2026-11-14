@@ -4,7 +4,9 @@ import Footer from './components/Footer.jsx';
 import HomePage from './pages/HomePage.jsx';
 import MenuPage from './pages/MenuPage.jsx';
 import ItemDetailsPage from './pages/ItemDetailsPage.jsx';
-import ComingSoonPage from './pages/ComingSoonPage.jsx';
+import CartPage from './pages/CartPage.jsx';
+import CheckoutPage from './pages/CheckoutPage.jsx';
+import ConfirmationPage from './pages/ConfirmationPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 
 export default function App() {
@@ -19,9 +21,9 @@ export default function App() {
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/menu/:id" element={<ItemDetailsPage />} />
           {/* Placeholders: replaced with real pages in Phase 3 */}
-          <Route path="/cart" element={<ComingSoonPage title="Your Cart" />} />
-          <Route path="/checkout" element={<ComingSoonPage title="Checkout" />} />
-          <Route path="/confirmation" element={<ComingSoonPage title="Order Confirmation" />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/confirmation" element={<ConfirmationPage />} />
           {/* Any other URL */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
