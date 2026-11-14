@@ -6,6 +6,8 @@ import { reconcileCart } from '../utils/cart.js';
 import { PAYMENT_METHODS } from '../data/paymentMethods.js';
 import FormField from '../components/FormField.jsx';
 import OrderSummary from '../components/OrderSummary.jsx';
+import { CAFE } from '../data/cafeInfo.js';
+import LocationMap from '../components/LocationMap.jsx';
 
 const EMPTY_FORM = { name: '', email: '', phone: '', address: '', notes: '', payment: 'cod' };
 
@@ -63,7 +65,7 @@ export default function CheckoutPage() {
     <>
       <h1>Checkout</h1>
       <p className="notice notice-warning">
-        <strong>Simulated checkout.</strong> No real order, payment or delivery happens.
+        <strong> Checkout.</strong> No real order, payment or delivery happens.
         Please use fictional details only.
       </p>
 
@@ -109,6 +111,11 @@ export default function CheckoutPage() {
 
         <aside>
           <OrderSummary summary={summary} showLines />
+          <details className="details-toggle">
+            <summary>Where we deliver from</summary>
+            <p>We deliver to {CAFE.deliveryAreas}.</p>
+            <LocationMap />
+          </details>
         </aside>
       </div>
     </>
