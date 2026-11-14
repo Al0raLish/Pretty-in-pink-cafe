@@ -2,10 +2,10 @@ import { formatPrice } from '../utils/format.js';
 import { FREE_DELIVERY_THRESHOLD, DELIVERY_FEE } from '../rules/businessRules.js';
 import { pointsForTotal } from '../rules/loyalty.js';
 import { useCart } from '../context/useCart.js';
+import { Link } from 'react-router-dom';
 
 export default function OrderSummary({ summary, showLines = false }) {
-  const { loyaltyPoints } = useCart();
-  const { lines, subtotal, delivery, promo, discount, deliveryFee, total, itemCount } = summary;
+  const { loyaltyPoints, isMember } = useCart(); const { lines, subtotal, delivery, promo, discount, deliveryFee, total, itemCount } = summary;
   const freeByPromo = Boolean(promo?.valid && promo.freeDelivery);
   const points = pointsForTotal(total);
 
@@ -48,8 +48,13 @@ export default function OrderSummary({ summary, showLines = false }) {
           Add {formatPrice(delivery.amountToFreeDelivery)} more for free delivery.
         </p>
       )}
-      {points > 0 && (
+      {isMember && points > 0 && (
         <p className="hint">You will earn {points} Pink Points with this order. Balance: {loyaltyPoints}.</p>
+      )}
+      {!isMember && subtotal > 0 && (
+        <p className="hint">
+          <Link to="/join">Join the Pink Club</Link> (free) to earn Pink Points and unlock member promo codes.
+        </p>
       )}
       <p className="hint">
         Delivery is free on orders of {formatPrice(FREE_DELIVERY_THRESHOLD)} or more,

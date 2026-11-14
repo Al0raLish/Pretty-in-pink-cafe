@@ -41,3 +41,19 @@ export function validateCheckout(values) {
   }
   return errors;
 }
+// Pink Club sign-up. The values are validated, then discarded (never stored).
+export function validateJoin(values) {
+  const errors = {};
+
+  const name = values.name.trim();
+  if (name === '') errors.name = 'Please enter your name.';
+  else if (name.length < 2) errors.name = 'Your name must be at least 2 characters.';
+  else if (/\d/.test(name)) errors.name = 'Your name should not contain numbers.';
+
+  const email = values.email.trim();
+  if (email === '') errors.email = 'Please enter your email address.';
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errors.email = 'Enter an email like name@example.com.';
+  }
+  return errors;
+}

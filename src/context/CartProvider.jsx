@@ -12,8 +12,8 @@ const CART_KEY = 'pip-cafe-cart-v1';
 const ORDER_KEY = 'pip-cafe-last-order-v1';
 const PROMO_KEY = 'pip-cafe-promo-v1';
 const POINTS_KEY = 'pip-cafe-points-v1';
+const MEMBER_KEY = 'pip-cafe-member-v1'; // stores only "1" or "0", no personal details
 
-// Runs once on first load. Reads localStorage safely, then re-checks it against current data.
 function loadSavedCart() {
   try {
     const raw = localStorage.getItem(CART_KEY);
@@ -52,6 +52,14 @@ function loadPromo() {
   }
 }
 
+function loadMember() {
+  try {
+    return localStorage.getItem(MEMBER_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
 function save(key, value) {
   try {
     localStorage.setItem(key, value);
@@ -67,12 +75,14 @@ export default function CartProvider({ children }) {
   const [lastOrder, setLastOrder] = useState(loadLastOrder);
   const [promoCode, setPromoCode] = useState(loadPromo);
   const [loyaltyPoints, setLoyaltyPoints] = useState(loadPoints);
+  const [isMember, setIsMember] = useState(loadMember);
 
   // Effects: keep localStorage in sync whenever these values change
   useEffect(() => { save(CART_KEY, JSON.stringify(lines)); }, [lines]);
   useEffect(() => { if (lastOrder) save(ORDER_KEY, JSON.stringify(lastOrder)); }, [lastOrder]);
   useEffect(() => { save(PROMO_KEY, promoCode); }, [promoCode]);
   useEffect(() => { save(POINTS_KEY, String(loyaltyPoints)); }, [loyaltyPoints]);
+  useEffect(() => { save(MEMBER_KEY, isMember ? '1' : '0'); }, [isMember]);
 
   function addToCart(item, { sizeId, addOnIds, quantity }) {
     const custom = checkCustomization(item, sizeId, addOnIds);
@@ -137,10 +147,10 @@ export default function CartProvider({ children }) {
     setNotices([]);
   }
 
-  // Checks the code against the CURRENT subtotal; only saves it if valid.
+  // Checks the code against the CURRENT subtotal and membership; only saves it if valid.
   function applyPromoCode(code) {
     const { subtotal } = buildSummary(lines);
-    const result = applyPromo(code, subtotal);
+    const result = applyPromo(code, subtotal, isMember);
     if (result.valid) setPromoCode(result.code);
     return result;
   }
@@ -149,10 +159,18 @@ export default function CartProvider({ children }) {
     setPromoCode('');
   }
 
+  function joinClub() {
+    setIsMember(true);
+  }
+
+  function leaveClub() {
+    setIsMember(false);
+  }
+
   // Builds a simulated order. Contains NO personal details.
   function placeOrder(paymentId) {
-    const s = buildSummary(lines, menuItems, promoCode);
-    const pointsEarned = pointsForTotal(s.total);
+    const s = buildSummary(lines, menuItems, promoCode, isMember);
+    const pointsEarned = isMember ? pointsForTotal(s.total) : 0; // points are a member perk
     const order = {
       orderNumber: `PIP-${Math.floor(100000 + Math.random() * 900000)}`,
       placedAt: new Date().toISOString(),
@@ -185,7 +203,8 @@ export default function CartProvider({ children }) {
     lastOrder,
     promoCode,
     loyaltyPoints,
-    summary: buildSummary(lines, menuItems, promoCode), // derived value
+    isMember,
+    summary: buildSummary(lines, menuItems, promoCode, isMember), // derived value
     quantityOfItem: (itemId) => quantityOfItem(lines, itemId),
     addToCart,
     updateQuantity,
@@ -195,6 +214,8 @@ export default function CartProvider({ children }) {
     dismissNotices,
     applyPromoCode,
     removePromoCode,
+    joinClub,
+    leaveClub,
     placeOrder,
   };
 

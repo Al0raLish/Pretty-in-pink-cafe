@@ -8,6 +8,8 @@ import CartPage from './pages/CartPage.jsx';
 import CheckoutPage from './pages/CheckoutPage.jsx';
 import ConfirmationPage from './pages/ConfirmationPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
+import AboutPage from './pages/AboutPage.jsx';
+import JoinPage from './pages/JoinPage.jsx';
 
 export default function App() {
   return (
@@ -20,6 +22,8 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/menu/:id" element={<ItemDetailsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/join" element={<JoinPage />} />
           {/* Placeholders: replaced with real pages in Phase 3 */}
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
