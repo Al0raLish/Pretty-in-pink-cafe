@@ -32,7 +32,7 @@ export const menuItems = [
   {
     id: 'honey-cardamom-cappuccino', name: 'Honey Cardamom Cappuccino', category: 'Coffee', price: 480,
     description: 'Classic cappuccino sweetened with local honey and cardamom.',
-    image: '/images/honey-cappuccino.jpg', available: true, stock: 20,
+    image: '/images/honey-cardamom-cappuccino.jpg', available: true, stock: 20,
     sizes: ['small', 'medium', 'large'],
     addOns: ['oat-milk', 'extra-shot', 'vanilla-syrup'],
   },
@@ -46,14 +46,14 @@ export const menuItems = [
   {
     id: 'strawberry-blush-lemonade', name: 'Strawberry Blush Lemonade', category: 'Refreshers', price: 420,
     description: 'Fresh strawberries, lemon, and sparkling water.',
-    image: '/images/strawberry-lemonade.jpg', available: true, stock: 25,
+    image: '/images/strawberry-blush-lemonade.jpg', available: true, stock: 25,
     sizes: ['small', 'medium', 'large'],
     addOns: ['rose-syrup'],
   },
   {
     id: 'peach-hibiscus-cooler', name: 'Peach Hibiscus Cooler', category: 'Refreshers', price: 440,
     description: 'Iced hibiscus tea with peach and a touch of mint.',
-    image: '/images/peach-cooler.jpg', available: true, stock: 18,
+    image: '/images/peach-hibiscus-cooler.jpg', available: true, stock: 18,
     sizes: ['medium', 'large'],
     addOns: [],
   },
@@ -66,37 +66,37 @@ export const menuItems = [
   {
     id: 'raspberry-rose-macarons', name: 'Raspberry Rose Macaron Box', category: 'Desserts', price: 900,
     description: 'Six handmade macarons with raspberry and rose filling.',
-    image: '/images/macarons.jpg', available: false, stock: 0, // unavailable on purpose
+    image: '/images/raspberry-rose-macaron.jpg', available: false, stock: 0, // unavailable on purpose
     sizes: [], addOns: [],
   },
   {
     id: 'strawberry-cream-tart', name: 'Strawberry Cream Tart', category: 'Desserts', price: 620,
     description: 'Buttery shell, vanilla custard, and fresh strawberries.',
-    image: '/images/strawberry-tart.jpg', available: true, stock: 8,
+    image: '/images/strawberry-cream-tart.jpg', available: true, stock: 8,
     sizes: [], addOns: ['whipped-cream'],
   },
   {
     id: 'butter-croissant', name: 'Butter Croissant', category: 'Bakery', price: 300,
     description: 'Flaky, golden, baked fresh every morning.',
-    image: '/images/croissant.jpg', available: true, stock: 30,
+    image: '/images/butter-croissant.jpg', available: true, stock: 30,
     sizes: [], addOns: [],
   },
   {
-    id: 'almond-pain-au-chocolat', name: 'Almond Pain au Chocolat', category: 'Bakery', price: 380,
-    description: 'Chocolate-filled pastry topped with toasted almonds.',
-    image: '/images/pain-au-chocolat.jpg', available: true, stock: 14,
+    id: 'blueberry-muffin', name: 'Blueberry Muffin', category: 'Bakery', price: 320,
+    description: 'Soft, freshly baked muffin filled with juicy blueberries and topped with a light golden crust.', 
+    image: '/images/blueberry-muffin.jpg', available: true, stock: 16,
     sizes: [], addOns: [],
   },
   {
     id: 'chicken-pesto-panini', name: 'Chicken Pesto Panini', category: 'Light Meals', price: 890,
     description: 'Grilled chicken, basil pesto, and mozzarella on ciabatta.',
-    image: '/images/panini.jpg', available: true, stock: 10,
+    image: '/images/chicken-pesto-panini.jpg', available: true, stock: 10,
     sizes: [], addOns: ['extra-cheese', 'side-salad'],
   },
   {
-    id: 'garden-quiche-salad', name: 'Garden Quiche & Salad', category: 'Light Meals', price: 780,
-    description: 'Vegetable quiche served with a light house salad.',
-    image: '/images/quiche.jpg', available: true, stock: 9,
+    id: 'grilled-chicken-wrap', name: 'Grilled Chicken Wrap', category: 'Light Meals', price: 850,
+    description: 'Tender grilled chicken with fresh lettuce, tomatoes and a light garlic sauce, wrapped in a soft tortilla.',
+    image: '/images/chicken-wrap.jpg', available: true, stock: 9,
     sizes: [], addOns: ['side-salad'],
   },
 ];
