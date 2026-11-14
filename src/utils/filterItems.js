@@ -21,8 +21,7 @@ export function filterAndSortItems(items, { search, category, priceId, sortId, a
         const matchesText =
             text === '' ||
             item.name.toLowerCase().includes(text) ||
-            item.description.toLowerCase().includes(text) ||
-            item.category.toLowerCase().includes(text);
+            (item.description ?? '').toLowerCase().includes(text) || item.category.toLowerCase().includes(text);
 
         const matchesAvailability = !availableOnly || (item.available && item.stock > 0);
         const matchesCategory = category === 'All' || item.category === category;

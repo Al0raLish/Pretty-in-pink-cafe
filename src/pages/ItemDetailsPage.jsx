@@ -1,21 +1,31 @@
 import { Link, useParams, useLocation } from 'react-router-dom';
-import { menuItems } from '../data/menuItems.js';
+import { useMenu } from '../context/useMenu.js';
 import { formatPrice } from '../utils/format.js';
 import FoodImage from '../components/FoodImage.jsx';
 import AddToCartPanel from '../components/AddToCartPanel.jsx';
+import LoadingState from '../components/LoadingState.jsx';
+import ErrorState from '../components/ErrorState.jsx';
 
 export default function ItemDetailsPage() {
   const { id } = useParams();
   const location = useLocation();
+  const { status, items, error, reload } = useMenu();
   const backTo = `/menu${location.state?.from ?? ''}`; // restores the filters
 
-  const item = menuItems.find((m) => m.id === id);
+  if (status === 'loading') return <LoadingState message="Loading item details…" />;
+  if (status === 'error') return <ErrorState message={error} onRetry={reload} />;
+
+  const item = items.find((m) => m.id === id);
 
   if (!item) {
     return (
       <div className="empty-state">
         <h1>We couldn’t find that item</h1>
-        <p>The link may be old or mistyped. “{id}” is not on our menu.</p>
+        <p>
+          {items.length === 0
+            ? 'The menu is being prepared. Please check back soon.'
+            : `The link may be old or mistyped. “${id}” is not on our menu.`}
+        </p>
         <Link to="/menu" className="btn btn-primary">Back to the menu</Link>
       </div>
     );
@@ -33,7 +43,7 @@ export default function ItemDetailsPage() {
           <p className="card-category">{item.category}</p>
           <h1>{item.name}</h1>
           <p className="price price-large">From {formatPrice(item.price)}</p>
-          <p>{item.description}</p>
+          <p>{item.description || 'Description coming soon.'}</p>
 
           {unavailable ? (
             <>
@@ -48,7 +58,6 @@ export default function ItemDetailsPage() {
                 <strong>Available.</strong>{' '}
                 {item.stock <= 5 ? `Only ${item.stock} left today.` : 'Ready to order.'}
               </p>
-              {/* key resets the choices when you move to a different item */}
               <AddToCartPanel key={item.id} item={item} />
             </>
           )}

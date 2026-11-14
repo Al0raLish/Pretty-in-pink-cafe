@@ -980,3 +980,88 @@ legend {
     display: flex;
     align-items: center;
 }
+
+/* ================= Phase 5: loading, errors, long content ================= */
+.loading-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+    padding: 2.5rem 1rem;
+    color: var(--text-muted);
+}
+
+.loading-state p {
+    margin: 0;
+}
+
+.spinner {
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 3px solid var(--border);
+    border-top-color: var(--rose);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.error-state {
+    border-color: var(--error);
+    background: var(--error-bg);
+}
+
+/* Long names and descriptions must never break the layout */
+h1,
+h2,
+h3,
+.card-title,
+.cart-line-title,
+.summary-lines span {
+    overflow-wrap: anywhere;
+}
+
+.summary-lines span:first-child {
+    min-width: 0;
+}
+
+.card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.demo-controls {
+    background: var(--peach);
+    border-top: 1px solid var(--border);
+    padding: .5rem 0;
+    font-size: .9rem;
+}
+
+.demo-controls summary {
+    cursor: pointer;
+    font-weight: 600;
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.demo-controls .field {
+    margin: 1rem 0 .5rem;
+}
+
+.demo-controls select {
+    font: inherit;
+    padding: .6rem .75rem;
+    border: 1px solid #c9b3ae;
+    border-radius: 10px;
+    background: #fff;
+    flex: 1;
+    min-width: 0;
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { CartContext } from './CartContext.js';
-import { menuItems } from '../data/menuItems.js';
+import { getCurrentItems } from '../services/menuService.js';
 import { checkQuantity, checkCustomization } from '../rules/businessRules.js';
 import { applyPromo } from '../rules/promoCodes.js';
 import { pointsForTotal } from '../rules/loyalty.js';
@@ -116,7 +116,7 @@ export default function CartProvider({ children }) {
 
   function updateQuantity(key, quantity) {
     const line = lines.find((l) => l.key === key);
-    const item = line && menuItems.find((m) => m.id === line.itemId);
+    const item = line && getCurrentItems().find((m) => m.id === line.itemId);
     if (!line || !item) return { valid: false, message: 'That item is no longer in your cart.' };
     if (!Number.isInteger(quantity) || quantity < 1) {
       return { valid: false, message: 'Quantity must be at least 1. Use Remove to delete the item.' };
@@ -146,6 +146,13 @@ export default function CartProvider({ children }) {
   function dismissNotices() {
     setNotices([]);
   }
+    // Re-checks the cart against the CURRENT menu (used by the demo controls).
+  // Returns the list of notices so the caller can report how many changes happened.
+  function recheckCart() {
+    const check = reconcileCart(lines);
+    if (check.notices.length > 0) replaceCart(check.lines, check.notices);
+    return check.notices;
+  }
 
   // Checks the code against the CURRENT subtotal and membership; only saves it if valid.
   function applyPromoCode(code) {
@@ -169,7 +176,7 @@ export default function CartProvider({ children }) {
 
   // Builds a simulated order. Contains NO personal details.
   function placeOrder(paymentId) {
-    const s = buildSummary(lines, menuItems, promoCode, isMember);
+    const s = buildSummary(lines, getCurrentItems(), promoCode, isMember);
     const pointsEarned = isMember ? pointsForTotal(s.total) : 0; // points are a member perk
     const order = {
       orderNumber: `PIP-${Math.floor(100000 + Math.random() * 900000)}`,
@@ -204,7 +211,7 @@ export default function CartProvider({ children }) {
     promoCode,
     loyaltyPoints,
     isMember,
-    summary: buildSummary(lines, menuItems, promoCode, isMember), // derived value
+    summary: buildSummary(lines, getCurrentItems(), promoCode, isMember), // derived value
     quantityOfItem: (itemId) => quantityOfItem(lines, itemId),
     addToCart,
     updateQuantity,
@@ -212,6 +219,7 @@ export default function CartProvider({ children }) {
     clearCart,
     replaceCart,
     dismissNotices,
+    recheckCart,
     applyPromoCode,
     removePromoCode,
     joinClub,

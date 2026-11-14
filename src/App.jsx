@@ -10,6 +10,7 @@ import ConfirmationPage from './pages/ConfirmationPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import JoinPage from './pages/JoinPage.jsx';
+import DemoControls from './components/DemoControls.jsx';
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <DemoControls />
     </>
   );
 }

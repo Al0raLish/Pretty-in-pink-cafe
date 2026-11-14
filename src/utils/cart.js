@@ -1,6 +1,6 @@
 // src/utils/cart.js
-import { menuItems, SIZES, ADD_ONS } from '../data/menuItems.js';
-import { checkQuantity, checkCustomization, getDeliveryFee } from '../rules/businessRules.js';
+import { SIZES, ADD_ONS } from '../data/menuItems.js';
+import { getCurrentItems } from '../services/menuService.js';import { checkQuantity, checkCustomization, getDeliveryFee } from '../rules/businessRules.js';
 import { applyPromo } from '../rules/promoCodes.js';
 // Same item + same size + same add-ons = same cart line
 export function makeLineKey(itemId, sizeId, addOnIds) {
@@ -24,7 +24,7 @@ export function quantityOfItem(lines, itemId) {
 }
 
 // Turns saved lines (IDs only) into display lines + totals. All derived, never stored.
-export function buildSummary(lines, items = menuItems, promoCode = '') {
+export function buildSummary(lines, items = getCurrentItems(), promoCode = '') {
   const detailed = lines
     .map((line) => {
       const item = items.find((i) => i.id === line.itemId);
@@ -66,7 +66,7 @@ export function buildSummary(lines, items = menuItems, promoCode = '') {
 
 // Checks saved/old lines against the CURRENT menu and rules.
 // Returns the lines that are still valid plus plain-English notices for anything changed.
-export function reconcileCart(saved, items = menuItems) {
+export function reconcileCart(saved, items = getCurrentItems()) {
   const lines = [];
   const notices = [];
   const usedByItem = {};

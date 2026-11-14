@@ -18,8 +18,7 @@ export default function MenuCard({ item }) {
                     {/* state remembers the filters so "Back to menu" can restore them */}
                     <Link to={`/menu/${item.id}`} state={{ from: location.search }}>{item.name}</Link>
                 </h3>
-                <p className="card-desc">{item.description}</p>
-                <p className="card-meta">
+                <p className="card-desc">{item.description || 'Description coming soon.'}</p>                <p className="card-meta">
                     {item.sizes.length > 0 ? `${item.sizes.length} sizes` : 'One size'}
                     {' · '}
                     {item.addOns.length > 0 ? `${item.addOns.length} add-ons` : 'No add-ons'}

@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
-import { menuItems, CATEGORIES } from '../data/menuItems.js';
+import { CATEGORIES } from '../data/menuItems.js';
 import { FREE_DELIVERY_THRESHOLD, DELIVERY_FEE } from '../rules/businessRules.js';
 import { formatPrice } from '../utils/format.js';
+import { useMenu } from '../context/useMenu.js';
 import MenuCard from '../components/MenuCard.jsx';
+import LoadingState from '../components/LoadingState.jsx';
+import ErrorState from '../components/ErrorState.jsx';
 
 const FEATURED_IDS = ['rose-petal-latte', 'pink-velvet-cupcake', 'chicken-pesto-panini'];
 
 export default function HomePage() {
-  const featured = menuItems.filter((item) => FEATURED_IDS.includes(item.id));
+  const { status, items, error, reload } = useMenu();
+  const featured = items.filter((item) => FEATURED_IDS.includes(item.id));
 
   return (
     <>
@@ -32,9 +36,16 @@ export default function HomePage() {
 
       <section aria-labelledby="featured-heading">
         <h2 id="featured-heading">Café favourites</h2>
-        <div className="grid">
-          {featured.map((item) => <MenuCard key={item.id} item={item} />)}
-        </div>
+        {status === 'loading' && <LoadingState />}
+        {status === 'error' && <ErrorState message={error} onRetry={reload} />}
+        {status === 'ready' && featured.length === 0 && (
+          <p>Our favourites are being prepared. Please check back soon.</p>
+        )}
+        {status === 'ready' && featured.length > 0 && (
+          <div className="grid">
+            {featured.map((item) => <MenuCard key={item.id} item={item} />)}
+          </div>
+        )}
       </section>
     </>
   );
