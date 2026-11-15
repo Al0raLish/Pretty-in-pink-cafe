@@ -25,8 +25,7 @@ export default function App() {
           <Route path="/menu/:id" element={<ItemDetailsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/join" element={<JoinPage />} />
-          {/* Placeholders: replaced with real pages in Phase 3 */}
-          <Route path="/cart" element={<CartPage />} />
+                    <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/confirmation" element={<ConfirmationPage />} />
           {/* Any other URL */}

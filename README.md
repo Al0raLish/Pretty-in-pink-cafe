@@ -5,7 +5,7 @@
 
 - **GitHub:** https://github.com/Al0raLish/pretty-in-pink-cafe
 - **Deployment:** https://pretty-in-pink-cafe.vercel.app/
-- **Final commit:** c31706a
+- **Final commit:** see the report and the Google Classroom submission (a README cannot contain its own commit hash)
 
 ## Description
 A frontend-only ordering website for a fictional Barbie-inspired café in Islamabad (F-6 to G-8 delivery area) for students and professionals. Customers browse the menu, search and filter, open item pages, choose sizes and add-ons, build a cart, fill in a checkout form, and reach a confirmation. All data is local and all orders and payments are simulated.
@@ -54,9 +54,22 @@ Open "Demonstration controls (for assessment)" at the bottom of any page:
 - "From" price shows the base price, which isn't the cheapest size for items without a small size.
 
 ## Image credits
-| File | Source | URL | Licence |
-|---|---|---|---|
-| images | Pinterest | https://www.pinterest.com/ | per instructor permission |
+All 12 food photos in `public/images/` were collected from Pinterest and are used for this academic assignment only (permitted for this assignment). Individual pin URLs were not recorded. Logo and favicon are original SVG artwork.
+
+| File | Source | Licence / use |
+|---|---|---|
+| `rose-petal-latte.jpg` | Pinterest | Academic use only |
+| `honey-cardamom-cappuccino.jpg` | Pinterest | Academic use only |
+| `vanilla-cold-brew.jpg` | Pinterest | Academic use only |
+| `strawberry-blush-lemonade.jpg` | Pinterest | Academic use only |
+| `peach-hibiscus-cooler.jpg` | Pinterest | Academic use only |
+| `pink-velvet-cupcake.jpg` | Pinterest | Academic use only |
+| `raspberry-rose-macaron.jpg` | Pinterest | Academic use only |
+| `strawberry-cream-tart.jpg` | Pinterest | Academic use only |
+| `butter-croissant.jpg` | Pinterest | Academic use only |
+| `blueberry-muffin.jpg` | Pinterest | Academic use only |
+| `chicken-pesto-panini.jpg` | Pinterest | Academic use only |
+| `chicken-wrap.jpg` | Pinterest | Academic use only |
 
 ## Concept map
 | Concept | File | Component / function |

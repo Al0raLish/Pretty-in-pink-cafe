@@ -47,6 +47,8 @@ export default function ItemDetailsPage() {
           <p className="price price-large">From {formatPrice(item.price)}</p>
           <p>{item.description || 'Description coming soon.'}</p>
 
+          <ItemInfo item={item} />
+
           {unavailable ? (
             <>
               <p className="notice notice-error" role="status">

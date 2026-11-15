@@ -24,7 +24,7 @@ export function quantityOfItem(lines, itemId) {
 }
 
 // Turns saved lines (IDs only) into display lines + totals. All derived, never stored.
-export function buildSummary(lines, items = getCurrentItems(), promoCode = '') {
+export function buildSummary(lines, items = getCurrentItems(), promoCode = '', isMember = false) {
   const detailed = lines
     .map((line) => {
       const item = items.find((i) => i.id === line.itemId);
@@ -48,7 +48,7 @@ export function buildSummary(lines, items = getCurrentItems(), promoCode = '') {
 
   // The promo is re-checked every time, so if the cart shrinks below
   // the minimum, the discount disappears automatically with an explanation.
-  const promo = promoCode ? applyPromo(promoCode, subtotal) : null;
+  const promo = promoCode ? applyPromo(promoCode, subtotal, isMember) : null;
   const discount = promo?.valid ? promo.discount : 0;
   const deliveryFee = promo?.valid && promo.freeDelivery ? 0 : delivery.fee;
 

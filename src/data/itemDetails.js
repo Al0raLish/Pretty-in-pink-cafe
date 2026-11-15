@@ -46,19 +46,19 @@ export const ITEM_DETAILS = {
     allergens: ['Gluten', 'Milk'], vegetarian: true, vegan: false,
     portion: '1 croissant (about 70 g)',
   },
-  'almond-pain-au-chocolat': {
-    ingredients: ['Laminated pastry', 'Dark chocolate', 'Toasted almonds'],
-    allergens: ['Gluten', 'Milk', 'Egg', 'Nuts'], vegetarian: true, vegan: false,
-    portion: '1 pastry (about 90 g)',
+  'blueberry-muffin': {
+    ingredients: ['Flour', 'Blueberries', 'Butter', 'Eggs', 'Sugar'],
+    allergens: ['Gluten', 'Milk', 'Egg'], vegetarian: true, vegan: false,
+    portion: '1 muffin (about 110 g)',
   },
   'chicken-pesto-panini': {
     ingredients: ['Ciabatta', 'Grilled chicken', 'Basil pesto', 'Mozzarella'],
     allergens: ['Gluten', 'Milk', 'Nuts'], vegetarian: false, vegan: false,
     portion: '1 panini (about 280 g)',
   },
-  'garden-quiche-salad': {
-    ingredients: ['Pastry', 'Eggs', 'Cream', 'Seasonal vegetables', 'House salad'],
-    allergens: ['Gluten', 'Milk', 'Egg'], vegetarian: true, vegan: false,
-    portion: '1 quiche slice with salad (about 300 g)',
+  'grilled-chicken-wrap': {
+    ingredients: ['Flour tortilla', 'Grilled chicken', 'Lettuce', 'Yoghurt sauce'],
+    allergens: ['Gluten', 'Milk'], vegetarian: false, vegan: false,
+    portion: '1 wrap (about 260 g)',
   },
 };

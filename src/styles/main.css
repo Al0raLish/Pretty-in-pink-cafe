@@ -490,7 +490,7 @@ main.container {
     }
 }
 
-/* ================= Phase 3 additions ================= */
+/* ================= Cart, checkout and form styles ================= */
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -788,7 +788,7 @@ legend {
     }
 }
 
-/* ================= Phase 4 ================= */
+/* ================= Promo, polish and accessibility ================= */
 :root {
     --gold-text: #86692c;
 }
@@ -981,7 +981,7 @@ legend {
     align-items: center;
 }
 
-/* ================= Phase 5: loading, errors, long content ================= */
+/* ================= Loading, errors and long content ================= */
 .loading-state {
     display: flex;
     align-items: center;
@@ -1102,4 +1102,11 @@ h3,
 .info-list dd {
     margin: .15rem 0 0;
     color: var(--text-muted);
+}
+/* Fix: let grid columns shrink so the cart/checkout never scroll sideways on phones */
+.cart-layout, .checkout-layout { grid-template-columns: minmax(0, 1fr); }
+.cart-layout > *, .checkout-layout > * { min-width: 0; }
+.cart-line { min-width: 0; }
+@media (min-width: 800px) {
+    .cart-layout, .checkout-layout { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
 }

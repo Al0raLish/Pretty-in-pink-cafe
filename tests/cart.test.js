@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { menuItems } from '../src/data/menuItems.js';
-import { getUnitPrice, reconcileCart } from '../src/utils/cart.js';
+import { getUnitPrice, reconcileCart, buildSummary } from '../src/utils/cart.js';
 import { validateCheckout } from '../src/utils/validation.js';
 
 const latte = menuItems.find((m) => m.id === 'rose-petal-latte');
@@ -29,4 +29,14 @@ test('checkout validation accepts good input and rejects a bad phone', () => {
     address: 'House 1, Street 2, F-7, Islamabad', notes: '', payment: 'cod' };
   assert.deepEqual(validateCheckout(good), {});
   assert.ok(validateCheckout({ ...good, phone: '12345' }).phone);
+});
+
+test('summary: PINK10 discounts a member but not a non-member', () => {
+  // 3 x Rose Petal Latte (small) = Rs. 1,560, above the Rs. 1,000 minimum
+  const lines = [{ key: 'k', itemId: 'rose-petal-latte', sizeId: 'small', addOnIds: [], quantity: 3 }];
+  const member = buildSummary(lines, menuItems, 'PINK10', true);
+  const guest = buildSummary(lines, menuItems, 'PINK10', false);
+  assert.equal(member.discount, 156);
+  assert.equal(member.total, member.subtotal - 156 + member.deliveryFee);
+  assert.equal(guest.discount, 0);
 });
